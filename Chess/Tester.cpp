@@ -5,6 +5,7 @@
 #include "ChessPiece.h"
 #include "ChessBoard.h"
 #include "Repo.h"
+#include "Pawn.h"
 
 
 void Tester::test_all()
@@ -12,6 +13,7 @@ void Tester::test_all()
 	Tester::test_chess_piece();
 	Tester::test_chess_board();
 	Tester::test_repo();
+	Tester::test_pawn();
 }
 
 void Tester::test_chess_piece()
@@ -111,6 +113,23 @@ void Tester::test_repo()
 	p = std::find(vec.begin(), vec.end(), c4);
 	assert(p == vec.end());
 	assert(vec.size() == 3);
+
+	std::cout << "Ok!\n";
+}
+
+void Tester::test_pawn()
+{
+	std::cout << "Pawn tests...";
+
+	Pawn pawn1;
+	Pawn pawn2 = Pawn(1, 0, 1, Color::black);
+	vector<pair<int, int>> sol;
+	sol = pawn1.moves();
+	pair<int, int> my_pair = { 0, 1 };
+	assert(sol[0] == my_pair);
+	sol = pawn2.moves();
+	my_pair = { 0, 2 };
+	assert(sol[0] == my_pair);
 
 	std::cout << "Ok!\n";
 }

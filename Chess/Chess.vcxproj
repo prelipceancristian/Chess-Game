@@ -150,12 +150,14 @@
     <ClCompile Include="Chess.cpp" />
     <ClCompile Include="ChessBoard.cpp" />
     <ClCompile Include="ChessPiece.cpp" />
+    <ClCompile Include="Pawn.cpp" />
     <ClCompile Include="Repo.cpp" />
     <ClCompile Include="Tester.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ChessBoard.h" />
     <ClInclude Include="ChessPiece.h" />
+    <ClInclude Include="Pawn.h" />
     <ClInclude Include="Repo.h" />
     <ClInclude Include="Tester.h" />
   </ItemGroup>

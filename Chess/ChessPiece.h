@@ -1,5 +1,11 @@
 #pragma once
 
+#include <utility>
+#include <vector>
+
+using std::vector;
+using std::pair;
+
 enum class Color
 {
 	white, black
@@ -31,5 +37,9 @@ public:
 	ChessPiece& operator=(const ChessPiece&);
 	bool operator == (const ChessPiece&);
 
+	virtual vector<pair<int, int>> moves() { 
+		vector<pair<int, int>> sol;
+		return sol; 
+	};
 };
 
