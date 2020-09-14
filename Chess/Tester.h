@@ -5,5 +5,8 @@ public:
 	Tester() {};
 	void test_all();
 	void test_chess_piece();
+	void test_repo();
 };
+
+
 

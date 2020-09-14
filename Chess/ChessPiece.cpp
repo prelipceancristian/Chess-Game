@@ -1,15 +1,17 @@
 #include "ChessPiece.h"
 ChessPiece::ChessPiece()
 {
+	id = 0;
 	pos_x = pos_y = 0;
 	color = white;
 }
 
-ChessPiece::ChessPiece(int _pos_x, int _pos_y, Color _color)
+ChessPiece::ChessPiece(int _id, int _pos_x, int _pos_y, Color _color)
 {
 	pos_x = _pos_x;
 	pos_y = _pos_y;
 	color = _color;
+	id = _id;
 }
 
 ChessPiece::ChessPiece(const ChessPiece& _piece)
@@ -17,6 +19,7 @@ ChessPiece::ChessPiece(const ChessPiece& _piece)
 	pos_x = _piece.pos_x;
 	pos_y = _piece.pos_y;
 	color = _piece.color;
+	id = _piece.id;
 }
 
 int ChessPiece::get_position_x()
@@ -32,6 +35,11 @@ int ChessPiece::get_position_y()
 Color ChessPiece::get_color()
 {
 	return this->color;
+}
+
+const int ChessPiece::get_id()
+{
+	return this->id;
 }
 
 void ChessPiece::set_position_x(int pos)
@@ -54,3 +62,16 @@ void ChessPiece::set_position(int pos_x, int pos_y)
 	pos_x = pos_x;
 	pos_y = pos_y;
 }
+
+ChessPiece& ChessPiece::operator=(const ChessPiece& _piece)
+{
+	this->color = _piece.color;
+	this->pos_x = _piece.pos_x;
+	this->pos_y = _piece.pos_y;
+	return *this;
+}
+
+bool ChessPiece::operator==(const ChessPiece& other)
+{
+	return this->color == other.color && this->pos_x == other.pos_x && this->pos_y == other.pos_y;
+};

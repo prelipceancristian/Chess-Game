@@ -1,0 +1,3 @@
+﻿  Tester.cpp
+C:\Users\Cristi\source\repos\Chess\Chess\ChessPiece.h(12,2): warning C4091: 'typedef ': ignored on left of 'Position' when no variable is declared
+  Chess.vcxproj -> C:\Users\Cristi\source\repos\Chess\x64\Debug\Chess.exe
