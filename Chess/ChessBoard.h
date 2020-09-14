@@ -5,12 +5,14 @@ class ChessBoard
 {
 private:
 	int size;
+	int id;
 public:
 	ChessBoard();
-	ChessBoard(int);
+	ChessBoard(int, int);
 	~ChessBoard() {};
 
-	const int get_size();
+	int get_size() const;
+	int get_id() const;
 
 	ChessBoard& operator=(const ChessBoard& other);
 	bool operator==(const ChessBoard& other);

@@ -1,16 +1,9 @@
 #pragma once
 
-enum Color
+enum class Color
 {
 	white, black
 };
-
-typedef struct Position
-{
-	int pos_x;
-	int pos_y;
-};
-
 
 class ChessPiece
 {
@@ -28,7 +21,7 @@ public:
 	int get_position_x();
 	int get_position_y();
 	Color get_color();
-	const int get_id();
+	int get_id() const;
 
 	void set_position_x(int);
 	void set_position_y(int);

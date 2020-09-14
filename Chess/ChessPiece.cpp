@@ -3,7 +3,7 @@ ChessPiece::ChessPiece()
 {
 	id = 0;
 	pos_x = pos_y = 0;
-	color = white;
+	color = Color::white;
 }
 
 ChessPiece::ChessPiece(int _id, int _pos_x, int _pos_y, Color _color)
@@ -37,7 +37,7 @@ Color ChessPiece::get_color()
 	return this->color;
 }
 
-const int ChessPiece::get_id()
+int ChessPiece::get_id() const
 {
 	return this->id;
 }
@@ -73,5 +73,5 @@ ChessPiece& ChessPiece::operator=(const ChessPiece& _piece)
 
 bool ChessPiece::operator==(const ChessPiece& other)
 {
-	return this->color == other.color && this->pos_x == other.pos_x && this->pos_y == other.pos_y;
+	return this->id == other.id;
 };
