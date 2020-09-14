@@ -7,6 +7,9 @@ public:
 	void test_chess_piece();
 	void test_chess_board();
 	void test_pawn();
+	void test_bishop();
+	void test_knight();
+	void test_rook();
 	void test_repo();
 };
 

@@ -6,6 +6,9 @@
 #include "ChessBoard.h"
 #include "Repo.h"
 #include "Pawn.h"
+#include "Bishop.h"
+#include "Knight.h"
+#include "Rook.h"
 
 
 void Tester::test_all()
@@ -14,6 +17,9 @@ void Tester::test_all()
 	Tester::test_chess_board();
 	Tester::test_repo();
 	Tester::test_pawn();
+	Tester::test_bishop();
+	Tester::test_knight();
+	Tester::test_rook();
 }
 
 void Tester::test_chess_piece()
@@ -130,6 +136,49 @@ void Tester::test_pawn()
 	sol = pawn2.moves();
 	my_pair = { 0, 2 };
 	assert(sol[0] == my_pair);
+
+	std::cout << "Ok!\n";
+}
+
+void Tester::test_bishop()
+{
+	std::cout << "Bishop tests...";
+
+	Bishop Bishop1;
+	Bishop Bishop2 = Bishop(1, 5, 3, Color::white);
+	vector<pair<int, int>> sol = Bishop2.moves();
+	assert(sol.size() == 11); // really annoying tests that i've done in debugging
+	vector<pair<int, int>> my_sol = { {6, 4}, {7, 5}, {6, 2}, {7, 1}, {4, 4}, {3, 5}, {2, 6}, {1, 7}, {4, 2}, {3, 1}, {2,0} };
+	for (int i = 0; i < sol.size(); i++)
+		assert(sol[i] == my_sol[i]);
+
+	std::cout << "Ok!\n";
+}
+
+void Tester::test_knight()
+{
+	std::cout << "Knight tests...";
+
+	Knight knight1;
+	Knight knight2 = Knight(1, 4, 3, Color::black);
+	vector<pair<int, int>> my_sol = { {5, 5}, {6, 4}, {6, 2}, {5, 1}, {3, 1}, {2, 2}, {2, 4}, {3, 5} };
+	vector<pair<int, int>> sol = knight2.moves();
+	for (int i = 0; i < sol.size(); i++)
+		assert(sol[i] == my_sol[i]);
+
+	std::cout << "Ok!\n";
+}
+
+void Tester::test_rook()
+{
+	std::cout << "Rook tests...";
+
+	Rook rook1;
+	Rook rook2 = Rook(1, 3, 2, Color::black);
+	vector<pair<int, int>> my_sol = { {3, 0}, {3, 1}, {3, 3}, {3, 4}, {3, 5}, {3, 6}, {3, 7}, {0, 2}, {1, 2}, {2, 2}, {4, 2}, {5, 2}, {6, 2}, {7, 2} };
+	vector<pair<int, int>> sol = rook2.moves();
+	for (int i = 0; i < sol.size(); i++)
+		assert(sol[i] == my_sol[i]);
 
 	std::cout << "Ok!\n";
 }
