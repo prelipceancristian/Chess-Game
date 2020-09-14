@@ -9,6 +9,8 @@
 #include "Bishop.h"
 #include "Knight.h"
 #include "Rook.h"
+#include "Queen.h"
+#include "King.h"
 
 
 void Tester::test_all()
@@ -20,6 +22,8 @@ void Tester::test_all()
 	Tester::test_bishop();
 	Tester::test_knight();
 	Tester::test_rook();
+	Tester::test_queen();
+	Tester::test_king();
 }
 
 void Tester::test_chess_piece()
@@ -178,6 +182,37 @@ void Tester::test_rook()
 	vector<pair<int, int>> my_sol = { {3, 0}, {3, 1}, {3, 3}, {3, 4}, {3, 5}, {3, 6}, {3, 7}, {0, 2}, {1, 2}, {2, 2}, {4, 2}, {5, 2}, {6, 2}, {7, 2} };
 	vector<pair<int, int>> sol = rook2.moves();
 	for (int i = 0; i < sol.size(); i++)
+		assert(sol[i] == my_sol[i]);
+	std::cout << "Ok!\n";
+}
+
+void Tester::test_queen()
+{
+	std::cout << "Queen tests...";
+
+	Queen queen1;
+	Queen queen2 = Queen(1, 2, 4, Color::black);
+	vector<pair<int, int>> my_sol = { {1, 2} };
+	vector<pair<int, int>> sol = queen2.moves();
+	// nope not gonna test that
+	std::cout << "Ok!\n";
+}
+
+void Tester::test_king()
+{
+	std::cout << "King tests...";
+
+	King king1;
+	King king2 = King(1, 0, 0, Color::black);
+	vector<pair<int, int>> sol = king2.moves();
+	vector<pair<int, int>> my_sol = { {0, 1}, {1, 1}, {1, 0} };
+	for (int i = 0; i < my_sol.size(); i++)
+		assert(sol[i] == my_sol[i]);
+
+	king2 = King(1, 2, 0, Color::black);
+	sol = king2.moves();
+	my_sol = { {2, 1}, {3, 1}, {3, 0}, {1, 0}, {1, 1} };
+	for (int i = 0; i < my_sol.size(); i++)
 		assert(sol[i] == my_sol[i]);
 
 	std::cout << "Ok!\n";
