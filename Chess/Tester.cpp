@@ -12,6 +12,7 @@
 #include "Queen.h"
 #include "King.h"
 #include "ServicePieces.h"
+#include "RepoPointers.h"
 
 
 void Tester::test_all()
@@ -239,5 +240,13 @@ void Tester::test_service()
 	vector<pair<int, int>> sol = pk->moves();
 	pcp = pk;
 	sol = pcp->moves();
+
+	RepoPointers<ChessPiece*> repo2;
+
+	ChessPiece* c1 = new ChessPiece(3, 1, 1, Color::white);
+	King* c2 = new King(4, 1, 1, Color::white);
+
+
+
 	std::cout << "Ok!\n";
 }
