@@ -11,6 +11,7 @@
 #include "Rook.h"
 #include "Queen.h"
 #include "King.h"
+#include "ServicePieces.h"
 
 
 void Tester::test_all()
@@ -24,6 +25,7 @@ void Tester::test_all()
 	Tester::test_rook();
 	Tester::test_queen();
 	Tester::test_king();
+	Tester::test_service();
 }
 
 void Tester::test_chess_piece()
@@ -215,5 +217,27 @@ void Tester::test_king()
 	for (int i = 0; i < my_sol.size(); i++)
 		assert(sol[i] == my_sol[i]);
 
+	std::cout << "Ok!\n";
+}
+
+void Tester::test_service()
+{
+	std::cout << "Service tests...";
+	/*
+	Repo<ChessPiece> repo;
+	ChessPiece c1 = ChessPiece(1, 0, 0, Color::black);
+	King k1 = King(2, 5, 0, Color::white);
+	repo.add(c1);
+	repo.add(k1);
+	ServicePieces service1 = ServicePieces(repo);
+	service1.move_piece(2, 5, 1);
+	assert(repo.find(2).get_position_x() == 5);
+	assert(repo.find(2).get_position_y() == 1);
+	*/
+	ChessPiece* pcp = new ChessPiece(1, 0, 0, Color::black);
+	King* pk = new King(2, 4, 0, Color::black);
+	vector<pair<int, int>> sol = pk->moves();
+	pcp = pk;
+	sol = pcp->moves();
 	std::cout << "Ok!\n";
 }

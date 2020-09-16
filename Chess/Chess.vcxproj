@@ -157,6 +157,7 @@
     <ClCompile Include="Repo.cpp" />
     <ClCompile Include="Bishop.cpp" />
     <ClCompile Include="Rook.cpp" />
+    <ClCompile Include="ServicePieces.cpp" />
     <ClCompile Include="Tester.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -169,6 +170,7 @@
     <ClInclude Include="Repo.h" />
     <ClInclude Include="Bishop.h" />
     <ClInclude Include="Rook.h" />
+    <ClInclude Include="ServicePieces.h" />
     <ClInclude Include="Tester.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

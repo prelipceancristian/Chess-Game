@@ -13,6 +13,7 @@ public:
 	void test_queen();
 	void test_repo();
 	void test_king();
+	void test_service();
 };
 
 
