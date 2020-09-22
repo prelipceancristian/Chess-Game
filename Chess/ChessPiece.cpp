@@ -57,10 +57,10 @@ void ChessPiece::set_color(Color color)
 	this->color = color;
 }
 
-void ChessPiece::set_position(int pos_x, int pos_y)
+void ChessPiece::set_position(int px, int py)
 {
-	pos_x = pos_x;
-	pos_y = pos_y;
+	this->pos_x = px;
+	this->pos_y = py;
 }
 
 ChessPiece& ChessPiece::operator=(const ChessPiece& _piece)
