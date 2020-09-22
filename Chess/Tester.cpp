@@ -234,10 +234,15 @@ void Tester::test_service()
 	assert(repo.find(2).get_position_x() == 5);
 	assert(repo.find(2).get_position_y() == 1);
 	*/
+	/*
 	ChessPiece* pcp = new ChessPiece(1, 0, 0, Color::black);
 	King* pk = new King(2, 4, 0, Color::black);
 	vector<pair<int, int>> sol = pk->moves();
 	pcp = pk;
 	sol = pcp->moves();
+	*/
+	Repo<ChessPiece*> repo;
+	ChessPiece* pcp = new ChessPiece(1, 0, 0, Color::black);
+	repo.add(pcp);
 	std::cout << "Ok!\n";
 }
