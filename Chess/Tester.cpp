@@ -235,7 +235,6 @@ void Tester::test_service()
 	assert(repo.find(2).get_position_x() == 5);
 	assert(repo.find(2).get_position_y() == 1);
 	*/
-<<<<<<< HEAD
 	/*
 	ChessPiece* pcp = new ChessPiece(1, 0, 0, Color::black);
 	King* pk = new King(2, 4, 0, Color::black);
@@ -243,10 +242,12 @@ void Tester::test_service()
 	pcp = pk;
 	sol = pcp->moves();
 	*/
+	/*
 	Repo<ChessPiece*> repo;
 	ChessPiece* pcp = new ChessPiece(1, 0, 0, Color::black);
 	repo.add(pcp);
-=======
+	*/
+
 	RepoPointers<ChessPiece> repo;
 	ChessPiece* cpp = new ChessPiece(1, 0, 0, Color::black);
 	repo.add(cpp);
@@ -276,6 +277,5 @@ void Tester::test_service()
 
 	service.setup_game();
 
->>>>>>> d58ed700ce71039dcc091eafcd37085196dd0423
 	std::cout << "Ok!\n";
 }
