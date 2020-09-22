@@ -1,6 +1,13 @@
 #pragma once
 #include "repo.h"
+#include "RepoPointers.h"
 #include "ChessPiece.h"
+#include "Rook.h"
+#include "Knight.h"
+#include "Bishop.h"
+#include "Queen.h"
+#include "King.h"
+#include "Pawn.h"
 
 class ServiceException : public runtime_error
 {
@@ -17,11 +24,11 @@ public:
 class ServicePieces
 {
 private:
-	Repo<ChessPiece>& repo;
+	RepoPointers<ChessPiece>& repo;
 public:
-	ServicePieces(Repo<ChessPiece>& _repo) : repo{ _repo } {};
+	ServicePieces(RepoPointers<ChessPiece>& _repo) : repo{ _repo } {};
 	void move_piece(int id, int px, int py);
-	void get_piece_moveset(int id);
+	vector<pair<int, int>> get_piece_moveset(int id);
 	void setup_game();
 };
 

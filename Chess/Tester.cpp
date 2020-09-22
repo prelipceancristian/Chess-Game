@@ -235,18 +235,34 @@ void Tester::test_service()
 	assert(repo.find(2).get_position_x() == 5);
 	assert(repo.find(2).get_position_y() == 1);
 	*/
-	ChessPiece* pcp = new ChessPiece(1, 0, 0, Color::black);
-	King* pk = new King(2, 4, 0, Color::black);
-	vector<pair<int, int>> sol = pk->moves();
-	pcp = pk;
-	sol = pcp->moves();
+	RepoPointers<ChessPiece> repo;
+	ChessPiece* cpp = new ChessPiece(1, 0, 0, Color::black);
+	repo.add(cpp);
+	King* kp = new King(2, 1, 1, Color::black);
+	repo.add(kp);
+	ServicePieces service = ServicePieces(repo);
+	vector<pair<int, int>> s = (repo.find(2))->moves();
+	service.move_piece(2, 2, 2);
+	try
+	{
+		service.move_piece(2, 4, 4);
+		assert(false);
+	}
+	catch (ServiceException) {};
+	Pawn* pp = new Pawn(3, 1, 0, Color::black);
+	repo.add(pp);
+	try
+	{
+		service.move_piece(3, 1, 0);
+		assert(false);
+	}
+	catch (ServiceException) {};
 
-	RepoPointers<ChessPiece*> repo2;
+	vector<pair<int, int>> s1 = kp->moves();
+	vector<pair<int, int>> s2 = service.get_piece_moveset(kp->get_id());
+	assert(s1 == s2);
 
-	ChessPiece* c1 = new ChessPiece(3, 1, 1, Color::white);
-	King* c2 = new King(4, 1, 1, Color::white);
-
-
+	service.setup_game();
 
 	std::cout << "Ok!\n";
 }

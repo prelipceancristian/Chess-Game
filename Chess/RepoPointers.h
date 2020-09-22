@@ -13,6 +13,7 @@ public:
 	virtual T* remove(int id) = 0;
 	virtual void update(T* elem) = 0;
 	virtual vector<T*> get_all() = 0;
+	virtual void clear_all() = 0;
 };
 
 template <typename T>
@@ -28,92 +29,46 @@ public:
 	virtual T* remove(int id) override;
 	virtual void update(T* elem) override;
 	virtual vector<T*> get_all() override;
+	virtual void clear_all() override;
 };
 
 template <typename T>
 void RepoPointers<T>::add(T* elem)
 {
-	int i;
-	for (i = 0; i < elems.size(); i++)
-	{
-		if (*(elems.at(i)) == *elem)
-			break;
-	}
-	if(i != elems.size())
-		throw RepoException("There already is an entity with this id!");
-	this->elems.insert({(*elem).get_id(), elem});
-	/*
 	auto it = this->elems.find(elem->get_id());
 	if (it != this->elems.end())
 		throw RepoException("There already is an entity with this id!");
 	this->elems.insert({ elem->get_id(), elem });
-	*/
 }
 
 template <typename T>
 T* RepoPointers<T>::find(int id)
 {
-	/*
 	auto it = this->elems.find(id);
 	if (it == this->elems.end())
 		throw RepoException("There is no enitiy with this id");
-	return it->second;
-	*/
-	int i;
-	for (i = 0; i < elems.size(); i++)
-	{
-		if (elems.at(i)->first == id)
-			break;
-	}
-	if (i == elems.size())
-		throw RepoException("There is no entity with this id!");
-	return elems.at(i)->second;
+	return it->second;	
 }
 
 template <typename T>
 T* RepoPointers<T>::remove(int key)
 {
-	/*
 	auto it = this->elems.find(key);
 	if (it == this->elems.end())
 		throw RepoException("There is no entity with this id!");
 	T* elem = (elems.find(key))->second;
 	this->elems.erase(key);
 	return elem;
-	*/
-	int i;
-	for (i = 0; i < elems.size(); i++)
-	{
-		if (elems.at(i)->first == key)
-			break;
-	}
-	if (i == elems.size())
-		throw RepoException("There is no entity with this id!");
-	T* elem = elems.find(key)->second;
-	elems.erase(key);
-	return elem;
 }
 
 template <typename T>
 void RepoPointers<T>::update(T* elem)
 {
-	/*
 	auto it = this->elems.find(elem->get_id());
 	if (it == this->elems.end())
 		throw RepoException("There is no entity with this id!");
 	this->elems.erase(elem->get_id());
 	this->elems.insert({ elem->get_id(), elem });
-	*/
-	int i;
-	for (i = 0; i < elems.size(); i++)
-	{
-		if (elems.at(i)->first == elem->get_id())
-			break;
-	}
-	if (i == elems.size())
-		throw RepoException("There is no entity with this id!");
-	elems.erase((*elem).get_id());
-	elems.insert({ (*elem).get_id(), elem});
 }
 
 template <typename T>
@@ -129,4 +84,10 @@ vector<T*> RepoPointers<T>::get_all()
 		}
 	);
 	return all;
+}
+
+template <typename T>
+void RepoPointers<T>::clear_all()
+{
+	this->elems.clear();
 }
