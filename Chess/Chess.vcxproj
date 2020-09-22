@@ -156,8 +156,10 @@
     <ClCompile Include="Queen.cpp" />
     <ClCompile Include="Repo.cpp" />
     <ClCompile Include="Bishop.cpp" />
+    <ClCompile Include="RepoPointers.cpp" />
     <ClCompile Include="Rook.cpp" />
     <ClCompile Include="ServicePieces.cpp" />
+    <ClCompile Include="ServicePiecesPointers.cpp" />
     <ClCompile Include="Tester.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -169,8 +171,10 @@
     <ClInclude Include="Queen.h" />
     <ClInclude Include="Repo.h" />
     <ClInclude Include="Bishop.h" />
+    <ClInclude Include="RepoPointers.h" />
     <ClInclude Include="Rook.h" />
     <ClInclude Include="ServicePieces.h" />
+    <ClInclude Include="ServicePiecesPointers.h" />
     <ClInclude Include="Tester.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ﻿  Tester.cpp
 C:\Users\Cristi\source\repos\Chess\Chess\Repo.h(54,1): error C2228: left of '.get_id' must have class/struct/union
 C:\Users\Cristi\source\repos\Chess\Chess\Repo.h(54,1): message : type is 'const T'
@@ -116,3 +117,10 @@ C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.2
               _Keyeq=std::equal_to<int>,
               _Alloc=std::allocator<std::pair<const int,ChessPiece *>>
           ]
+=======
+﻿  RepoPointers.cpp
+  ServicePieces.cpp
+  Tester.cpp
+  Generating Code...
+  Chess.vcxproj -> C:\Users\Cristi\source\repos\Chess\x64\Debug\Chess.exe
+>>>>>>> d58ed700ce71039dcc091eafcd37085196dd0423

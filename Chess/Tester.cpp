@@ -12,6 +12,7 @@
 #include "Queen.h"
 #include "King.h"
 #include "ServicePieces.h"
+#include "RepoPointers.h"
 
 
 void Tester::test_all()
@@ -234,6 +235,7 @@ void Tester::test_service()
 	assert(repo.find(2).get_position_x() == 5);
 	assert(repo.find(2).get_position_y() == 1);
 	*/
+<<<<<<< HEAD
 	/*
 	ChessPiece* pcp = new ChessPiece(1, 0, 0, Color::black);
 	King* pk = new King(2, 4, 0, Color::black);
@@ -244,5 +246,36 @@ void Tester::test_service()
 	Repo<ChessPiece*> repo;
 	ChessPiece* pcp = new ChessPiece(1, 0, 0, Color::black);
 	repo.add(pcp);
+=======
+	RepoPointers<ChessPiece> repo;
+	ChessPiece* cpp = new ChessPiece(1, 0, 0, Color::black);
+	repo.add(cpp);
+	King* kp = new King(2, 1, 1, Color::black);
+	repo.add(kp);
+	ServicePieces service = ServicePieces(repo);
+	vector<pair<int, int>> s = (repo.find(2))->moves();
+	service.move_piece(2, 2, 2);
+	try
+	{
+		service.move_piece(2, 4, 4);
+		assert(false);
+	}
+	catch (ServiceException) {};
+	Pawn* pp = new Pawn(3, 1, 0, Color::black);
+	repo.add(pp);
+	try
+	{
+		service.move_piece(3, 1, 0);
+		assert(false);
+	}
+	catch (ServiceException) {};
+
+	vector<pair<int, int>> s1 = kp->moves();
+	vector<pair<int, int>> s2 = service.get_piece_moveset(kp->get_id());
+	assert(s1 == s2);
+
+	service.setup_game();
+
+>>>>>>> d58ed700ce71039dcc091eafcd37085196dd0423
 	std::cout << "Ok!\n";
 }
