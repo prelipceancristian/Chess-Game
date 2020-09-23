@@ -2,6 +2,7 @@
 
 #include <utility>
 #include <vector>
+#include "ChessBoard.h"
 
 using std::vector;
 using std::pair;
@@ -37,7 +38,7 @@ public:
 	ChessPiece& operator=(const ChessPiece&);
 	bool operator == (const ChessPiece&);
 
-	virtual vector<pair<int, int>> moves() { 
+	virtual vector<pair<int, int>> moves(ChessBoard) { 
 		vector<pair<int, int>> sol;
 		return sol; 
 	};

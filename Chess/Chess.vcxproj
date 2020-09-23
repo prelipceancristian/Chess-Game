@@ -161,6 +161,7 @@
     <ClCompile Include="ServicePieces.cpp" />
     <ClCompile Include="ServicePiecesPointers.cpp" />
     <ClCompile Include="Tester.cpp" />
+    <ClCompile Include="UI.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ChessBoard.h" />
@@ -176,6 +177,7 @@
     <ClInclude Include="ServicePieces.h" />
     <ClInclude Include="ServicePiecesPointers.h" />
     <ClInclude Include="Tester.h" />
+    <ClInclude Include="UI.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

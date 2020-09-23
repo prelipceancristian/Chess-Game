@@ -4,17 +4,19 @@ void ServicePieces::move_piece(int id, int pos_x, int pos_y)
 	//TODO: check whether there is a piece in front which blocks pathing
 	auto chesspiece = repo.find(id);
 	pair<int, int> pos = {pos_x, pos_y};
-	vector<pair<int, int>> positions = chesspiece->moves(); // Chesspiece does not have implemented the moves() method
+	vector<pair<int, int>> positions = chesspiece->moves(this->cb);
 	auto it = std::find(positions.begin(), positions.end(), pos);
 	if (it == positions.end())
 		throw ServiceException("Move not possible!");
+	cb.set_val_at_coord(0, chesspiece->get_position_x(), chesspiece->get_position_y());
+	cb.set_val_at_coord(chesspiece->get_color() == Color::white ? 1 : -1, pos_x, pos_y);
 	chesspiece->set_position(pos_x, pos_y);
 	repo.update(chesspiece);
 }
 
 vector<pair<int, int>> ServicePieces::get_piece_moveset(int id)
 {
-	return (this->repo.find(id))->moves();
+	return (this->repo.find(id))->moves(this->cb);
 }
 
 void ServicePieces::setup_game()
@@ -92,5 +94,21 @@ void ServicePieces::setup_game()
 	repo.add(pb6);
 	repo.add(pb7);
 	repo.add(pb8);
+
+	for (int i = 0; i < 2; i++)
+	{
+		for (int j = 0; j < 8; j++)
+		{
+			this->cb.set_val_at_coord(1, i, j);
+		}
+	}
+
+	for (int i = 6; i < 8; i++)
+	{
+		for (int j = 0; j < 8; j++)
+		{
+			this->cb.set_val_at_coord(-1, i, j);
+		}
+	}
 
 }

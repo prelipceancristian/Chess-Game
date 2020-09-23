@@ -133,14 +133,14 @@ void Tester::test_repo()
 void Tester::test_pawn()
 {
 	std::cout << "Pawn tests...";
-
+	ChessBoard cb;
 	Pawn pawn1;
-	Pawn pawn2 = Pawn(1, 0, 1, Color::black);
+	Pawn pawn2 = Pawn(1, 0, 1, Color::white);
 	vector<pair<int, int>> sol;
-	sol = pawn1.moves();
+	sol = pawn1.moves(cb);
 	pair<int, int> my_pair = { 0, 1 };
 	assert(sol[0] == my_pair);
-	sol = pawn2.moves();
+	sol = pawn2.moves(cb);
 	my_pair = { 0, 2 };
 	assert(sol[0] == my_pair);
 
@@ -150,10 +150,10 @@ void Tester::test_pawn()
 void Tester::test_bishop()
 {
 	std::cout << "Bishop tests...";
-
+	ChessBoard cb;
 	Bishop Bishop1;
 	Bishop Bishop2 = Bishop(1, 5, 3, Color::white);
-	vector<pair<int, int>> sol = Bishop2.moves();
+	vector<pair<int, int>> sol = Bishop2.moves(cb);
 	assert(sol.size() == 11); // really annoying tests that i've done in debugging
 	vector<pair<int, int>> my_sol = { {6, 4}, {7, 5}, {6, 2}, {7, 1}, {4, 4}, {3, 5}, {2, 6}, {1, 7}, {4, 2}, {3, 1}, {2,0} };
 	for (int i = 0; i < sol.size(); i++)
@@ -165,11 +165,11 @@ void Tester::test_bishop()
 void Tester::test_knight()
 {
 	std::cout << "Knight tests...";
-
+	ChessBoard cb;
 	Knight knight1;
 	Knight knight2 = Knight(1, 4, 3, Color::black);
 	vector<pair<int, int>> my_sol = { {5, 5}, {6, 4}, {6, 2}, {5, 1}, {3, 1}, {2, 2}, {2, 4}, {3, 5} };
-	vector<pair<int, int>> sol = knight2.moves();
+	vector<pair<int, int>> sol = knight2.moves(cb);
 	for (int i = 0; i < sol.size(); i++)
 		assert(sol[i] == my_sol[i]);
 
@@ -179,11 +179,11 @@ void Tester::test_knight()
 void Tester::test_rook()
 {
 	std::cout << "Rook tests...";
-
+	ChessBoard cb;
 	Rook rook1;
 	Rook rook2 = Rook(1, 3, 2, Color::black);
 	vector<pair<int, int>> my_sol = { {3, 0}, {3, 1}, {3, 3}, {3, 4}, {3, 5}, {3, 6}, {3, 7}, {0, 2}, {1, 2}, {2, 2}, {4, 2}, {5, 2}, {6, 2}, {7, 2} };
-	vector<pair<int, int>> sol = rook2.moves();
+	vector<pair<int, int>> sol = rook2.moves(cb);
 	for (int i = 0; i < sol.size(); i++)
 		assert(sol[i] == my_sol[i]);
 	std::cout << "Ok!\n";
@@ -192,11 +192,11 @@ void Tester::test_rook()
 void Tester::test_queen()
 {
 	std::cout << "Queen tests...";
-
+	ChessBoard cb;
 	Queen queen1;
 	Queen queen2 = Queen(1, 2, 4, Color::black);
 	vector<pair<int, int>> my_sol = { {1, 2} };
-	vector<pair<int, int>> sol = queen2.moves();
+	vector<pair<int, int>> sol = queen2.moves(cb);
 	// nope not gonna test that
 	std::cout << "Ok!\n";
 }
@@ -204,16 +204,16 @@ void Tester::test_queen()
 void Tester::test_king()
 {
 	std::cout << "King tests...";
-
+	ChessBoard cb;
 	King king1;
 	King king2 = King(1, 0, 0, Color::black);
-	vector<pair<int, int>> sol = king2.moves();
+	vector<pair<int, int>> sol = king2.moves(cb);
 	vector<pair<int, int>> my_sol = { {0, 1}, {1, 1}, {1, 0} };
 	for (int i = 0; i < my_sol.size(); i++)
 		assert(sol[i] == my_sol[i]);
 
 	king2 = King(1, 2, 0, Color::black);
-	sol = king2.moves();
+	sol = king2.moves(cb);
 	my_sol = { {2, 1}, {3, 1}, {3, 0}, {1, 0}, {1, 1} };
 	for (int i = 0; i < my_sol.size(); i++)
 		assert(sol[i] == my_sol[i]);
@@ -247,14 +247,14 @@ void Tester::test_service()
 	ChessPiece* pcp = new ChessPiece(1, 0, 0, Color::black);
 	repo.add(pcp);
 	*/
-
+	ChessBoard cb;
 	RepoPointers<ChessPiece> repo;
 	ChessPiece* cpp = new ChessPiece(1, 0, 0, Color::black);
 	repo.add(cpp);
 	King* kp = new King(2, 1, 1, Color::black);
 	repo.add(kp);
-	ServicePieces service = ServicePieces(repo);
-	vector<pair<int, int>> s = (repo.find(2))->moves();
+	ServicePieces service = ServicePieces(repo, cb);
+	vector<pair<int, int>> s = (repo.find(2))->moves(cb);
 	service.move_piece(2, 2, 2);
 	try
 	{
@@ -271,7 +271,7 @@ void Tester::test_service()
 	}
 	catch (ServiceException) {};
 
-	vector<pair<int, int>> s1 = kp->moves();
+	vector<pair<int, int>> s1 = kp->moves(cb);
 	vector<pair<int, int>> s2 = service.get_piece_moveset(kp->get_id());
 	assert(s1 == s2);
 

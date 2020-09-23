@@ -25,8 +25,9 @@ class ServicePieces
 {
 private:
 	RepoPointers<ChessPiece>& repo;
+	ChessBoard cb;
 public:
-	ServicePieces(RepoPointers<ChessPiece>& _repo) : repo{ _repo } {};
+	ServicePieces(RepoPointers<ChessPiece>& _repo, ChessBoard& _cb) : repo{ _repo }, cb{_cb} {};
 	void move_piece(int id, int px, int py);
 	vector<pair<int, int>> get_piece_moveset(int id);
 	void setup_game();
