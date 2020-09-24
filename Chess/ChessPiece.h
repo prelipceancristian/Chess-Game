@@ -3,9 +3,14 @@
 #include <utility>
 #include <vector>
 #include "ChessBoard.h"
+#include <iostream>
+#include <string>
+
 
 using std::vector;
 using std::pair;
+using std::ostream;
+using std::string;
 
 enum class Color
 {
@@ -14,11 +19,12 @@ enum class Color
 
 class ChessPiece
 {
-private:
+protected:
 	int id;
 	int pos_x;
 	int pos_y;
 	Color color;
+	string name = "ChessPiece";
 public:
 	ChessPiece();
 	ChessPiece(int, int, int, Color);
@@ -42,5 +48,11 @@ public:
 		vector<pair<int, int>> sol;
 		return sol; 
 	};
+
+	friend ostream& operator<<(ostream& os, const ChessPiece& piece)
+	{
+		os << piece.get_id() << ". " << piece.name << " at coords (" << char(piece.pos_x + 65) << ", " << piece.pos_y << ")";
+		return os;
+	}
 };
 

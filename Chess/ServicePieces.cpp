@@ -32,14 +32,14 @@ void ServicePieces::setup_game()
 	Knight* kw2 = new Knight(7, 6, 0, Color::white);
 	Rook* rw2 = new Rook(8, 7, 0, Color::white);
 
-	Pawn* pw1 = new Pawn(9, 1, 0, Color::white);
+	Pawn* pw1 = new Pawn(9, 0, 1, Color::white);
 	Pawn* pw2 = new Pawn(10, 1, 1, Color::white);
-	Pawn* pw3 = new Pawn(11, 1, 2, Color::white);
-	Pawn* pw4 = new Pawn(12, 1, 3, Color::white);
-	Pawn* pw5 = new Pawn(13, 1, 4, Color::white);
-	Pawn* pw6 = new Pawn(14, 1, 5, Color::white);
-	Pawn* pw7 = new Pawn(15, 1, 6, Color::white);
-	Pawn* pw8 = new Pawn(16, 1, 7, Color::white);
+	Pawn* pw3 = new Pawn(11, 2, 1, Color::white);
+	Pawn* pw4 = new Pawn(12, 3, 1, Color::white);
+	Pawn* pw5 = new Pawn(13, 4, 1, Color::white);
+	Pawn* pw6 = new Pawn(14, 5, 1, Color::white);
+	Pawn* pw7 = new Pawn(15, 6, 1, Color::white);
+	Pawn* pw8 = new Pawn(16, 7, 1, Color::white);
 
 	Rook* rb1 = new Rook(17, 0, 7, Color::black);
 	Knight* kb1 = new Knight(18, 1, 7, Color::black);
@@ -50,14 +50,14 @@ void ServicePieces::setup_game()
 	Knight* kb2 = new Knight(23, 6, 7, Color::black);
 	Rook* rb2 = new Rook(24, 7, 7, Color::black);
 
-	Pawn* pb1 = new Pawn(25, 6, 0, Color::white);
-	Pawn* pb2 = new Pawn(26, 6, 1, Color::white);
-	Pawn* pb3 = new Pawn(27, 6, 2, Color::white);
-	Pawn* pb4 = new Pawn(28, 6, 3, Color::white);
-	Pawn* pb5 = new Pawn(29, 6, 4, Color::white);
-	Pawn* pb6 = new Pawn(30, 6, 5, Color::white);
-	Pawn* pb7 = new Pawn(31, 6, 6, Color::white);
-	Pawn* pb8 = new Pawn(32, 6, 7, Color::white);
+	Pawn* pb1 = new Pawn(25, 0, 6, Color::black);
+	Pawn* pb2 = new Pawn(26, 1, 6, Color::black);
+	Pawn* pb3 = new Pawn(27, 2, 6, Color::black);
+	Pawn* pb4 = new Pawn(28, 3, 6, Color::black);
+	Pawn* pb5 = new Pawn(29, 4, 6, Color::black);
+	Pawn* pb6 = new Pawn(30, 5, 6, Color::black);
+	Pawn* pb7 = new Pawn(31, 6, 6, Color::black);
+	Pawn* pb8 = new Pawn(32, 7, 6, Color::black);
 
 	repo.add(rw1);
 	repo.add(kw1);
@@ -111,4 +111,34 @@ void ServicePieces::setup_game()
 		}
 	}
 
+}
+
+vector<ChessPiece*> ServicePieces::get_white_pieces()
+{
+	vector<ChessPiece*> all_pieces = repo.get_all();
+	vector<ChessPiece*> sol;
+	for_each(
+		all_pieces.begin(),
+		all_pieces.end(),
+		[&sol](const auto& elem)
+		{
+			if (elem->get_color() == Color::white)
+				sol.push_back(elem);
+		});
+	return sol;
+}
+
+vector<ChessPiece*> ServicePieces::get_black_pieces()
+{
+	vector<ChessPiece*> all_pieces = repo.get_all();
+	vector<ChessPiece*> sol;
+	for_each(
+		all_pieces.begin(),
+		all_pieces.end(),
+		[&sol](const auto& elem)
+		{
+			if (elem->get_color() == Color::black)
+				sol.push_back(elem);
+		});
+	return sol;
 }

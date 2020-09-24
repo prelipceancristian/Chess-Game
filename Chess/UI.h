@@ -10,5 +10,8 @@ public:
 	void run_ui();
 	void show_menu();
 	void greeting();
+	void start_game();
+	void show_menu_game();
+	void show_all_pieces(bool);
 };
 

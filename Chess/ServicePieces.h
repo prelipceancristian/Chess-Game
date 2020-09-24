@@ -31,5 +31,7 @@ public:
 	void move_piece(int id, int px, int py);
 	vector<pair<int, int>> get_piece_moveset(int id);
 	void setup_game();
+	vector<ChessPiece*> get_white_pieces();
+	vector<ChessPiece*> get_black_pieces();
 };
 
