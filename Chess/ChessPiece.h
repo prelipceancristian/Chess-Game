@@ -51,7 +51,7 @@ public:
 
 	friend ostream& operator<<(ostream& os, const ChessPiece& piece)
 	{
-		os << piece.get_id() << ". " << piece.name << " at coords (" << char(piece.pos_x + 65) << ", " << piece.pos_y << ")";
+		os << piece.get_id() << ". " << piece.name << " at coords (" << char(piece.pos_x + 65) << ", " << piece.pos_y + 1 << ")";
 		return os;
 	}
 };

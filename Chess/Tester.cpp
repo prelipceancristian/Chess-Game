@@ -27,6 +27,7 @@ void Tester::test_all()
 	Tester::test_queen();
 	Tester::test_king();
 	Tester::test_service();
+	Tester::test_movement();
 }
 
 void Tester::test_chess_piece()
@@ -276,6 +277,35 @@ void Tester::test_service()
 	assert(s1 == s2);
 
 	service.setup_game();
+
+	std::cout << "Ok!\n";
+}
+
+void Tester::test_movement()
+{
+	std::cout << "Movement tests...";
+
+	ChessBoard cb;
+	King* kw = new King(4, 3, 0, Color::white);
+	cb.set_val_at_coord(1, 3, 0);
+	vector<pair<int, int>> mov = kw->moves(cb);
+	vector<pair<int, int>> my_sol = { {3, 1}, {4, 1}, {4, 0}, {2, 0}, {2, 1} };
+	assert(mov == my_sol);
+
+	Pawn* pw4 = new Pawn(12, 3, 1, Color::white);
+	cb.set_val_at_coord(1, 3, 1);
+	my_sol.erase(my_sol.begin());
+	mov = kw->moves(cb);
+	assert(mov == my_sol);
+
+	Pawn* pw3 = new Pawn(11, 2, 1, Color::white);
+	Pawn* pw5 = new Pawn(13, 4, 1, Color::white);
+	cb.set_val_at_coord(1, 2, 1);
+	cb.set_val_at_coord(1, 4, 1);
+	my_sol.erase(my_sol.begin());
+	my_sol.erase(my_sol.begin() + 2);
+	mov = kw->moves(cb);
+	assert(mov == my_sol);
 
 	std::cout << "Ok!\n";
 }

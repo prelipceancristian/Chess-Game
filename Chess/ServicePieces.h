@@ -33,5 +33,6 @@ public:
 	void setup_game();
 	vector<ChessPiece*> get_white_pieces();
 	vector<ChessPiece*> get_black_pieces();
+	ChessPiece* get_piece_by_id(int);
 };
 

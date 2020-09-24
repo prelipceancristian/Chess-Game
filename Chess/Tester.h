@@ -14,6 +14,7 @@ public:
 	void test_repo();
 	void test_king();
 	void test_service();
+	void test_movement();
 };
 
 

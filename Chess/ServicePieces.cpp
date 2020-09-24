@@ -99,7 +99,7 @@ void ServicePieces::setup_game()
 	{
 		for (int j = 0; j < 8; j++)
 		{
-			this->cb.set_val_at_coord(1, i, j);
+			this->cb.set_val_at_coord(1, j, i);
 		}
 	}
 
@@ -107,7 +107,7 @@ void ServicePieces::setup_game()
 	{
 		for (int j = 0; j < 8; j++)
 		{
-			this->cb.set_val_at_coord(-1, i, j);
+			this->cb.set_val_at_coord(-1, j, i);
 		}
 	}
 
@@ -141,4 +141,9 @@ vector<ChessPiece*> ServicePieces::get_black_pieces()
 				sol.push_back(elem);
 		});
 	return sol;
+}
+
+ChessPiece* ServicePieces::get_piece_by_id(int _id)
+{
+	return repo.find(_id);
 }

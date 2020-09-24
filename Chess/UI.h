@@ -13,5 +13,8 @@ public:
 	void start_game();
 	void show_menu_game();
 	void show_all_pieces(bool);
+
+	bool handle_move(bool);
+	void show_list_of_coords(vector<pair<int, int>>);
 };
 
