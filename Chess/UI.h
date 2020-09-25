@@ -17,6 +17,7 @@ public:
 	void handle_move(bool, bool&);
 	void show_list_of_coords(vector<pair<int, int>>);
 	void handle_moveset();
-	void turn(bool);
+	void turn(bool, bool&);
+	void resign(bool, bool&);
 };
 

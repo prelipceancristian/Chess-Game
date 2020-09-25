@@ -75,9 +75,10 @@ void UI::show_menu_game()
 	cout << "1. Show all pieces\n";
 	cout << "2. See piece moveset\n";
 	cout << "3. Move a piece\n";
+	cout << "x. Resign\n";
 }
 
-void UI::turn(bool is_white)
+void UI::turn(bool is_white, bool& end_game)
 {
 	cout << (is_white ? "White's turn!\n" : "Black's turn!\n");
 	bool end_turn = false;
@@ -104,6 +105,13 @@ void UI::turn(bool is_white)
 			handle_move(is_white, end_turn);
 			break;
 		}
+		case 'x':
+		{
+			resign(is_white, end_game);
+			if (end_game == true)
+				end_turn = true;
+			break;
+		}
 		default:
 		{
 			cout << "Invalid character!\n";
@@ -121,7 +129,7 @@ void UI::start_game()
 	bool done = false;
 	while (!done)
 	{
-		turn(white_turn);
+		turn(white_turn, done);
 		white_turn = !white_turn;
 	}
 }
@@ -195,4 +203,28 @@ void UI::handle_moveset()
 	catch (ServiceException se) {
 		cout << "ERROR! " << se.what() << "\n";
 	};
+}
+
+void UI::resign(bool is_white, bool& end_game)
+{
+	char decision;
+	bool decided = false;
+	while (!decided)
+	{
+		cout << "Are you sure you want to resign?(y/n)";
+		cin >> decision;
+		if (decision == 'y')
+		{
+			cout << (is_white ? "White" : "Black") << " resigns! The winner is " << (is_white ? "Black!" : "White!") << "\n";
+			decided = true;
+			end_game = true;
+		}
+		else if (decision == 'n')
+		{
+			cout << "Going back...\n";
+			decided = true;
+		}
+		else
+			cout << "Invalid character, choose 'y' if you want to resign and 'n' if you want to go back to the menu.";
+	}
 }
