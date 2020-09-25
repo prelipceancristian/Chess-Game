@@ -2,7 +2,7 @@
 
 bool can_add(int x, int y, ChessBoard cb)
 {
-	if (x < 8 && y >= 0 && cb.is_empty(x, y))
+	if (x < 8 && y >= 0 && x >= 0 && y < 8 && cb.is_empty(x, y))
 		return true;
 	return false;
 }

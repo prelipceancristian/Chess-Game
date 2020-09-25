@@ -73,7 +73,44 @@ void UI::show_all_pieces(bool color_white)
 void UI::show_menu_game()
 {
 	cout << "1. Show all pieces\n";
-	cout << "2. Move a piece\n";
+	cout << "2. See piece moveset\n";
+	cout << "3. Move a piece\n";
+}
+
+void UI::turn(bool is_white)
+{
+	cout << (is_white ? "White's turn!\n" : "Black's turn!\n");
+	bool end_turn = false;
+	while (!end_turn)
+	{
+		show_menu_game();
+		char op;
+		cout << "Your option: ";
+		cin >> op;
+		switch (op)
+		{
+		case '1':
+		{
+			show_all_pieces(is_white);
+			break;
+		}
+		case '2':
+		{
+			handle_moveset();
+			break;
+		}
+		case '3':
+		{
+			handle_move(is_white, end_turn);
+			break;
+		}
+		default:
+		{
+			cout << "Invalid character!\n";
+			break;
+		}
+		}
+	}
 }
 
 void UI::start_game()
@@ -84,84 +121,22 @@ void UI::start_game()
 	bool done = false;
 	while (!done)
 	{
-		if (white_turn)
-		{
-			cout << "White's turn!\n";
-			bool end_turn = false;
-			while (!end_turn)
-			{
-				show_menu_game();
-				char op;
-				cout << "Your option: ";
-				cin >> op;
-				switch (op)
-				{
-				case '1':
-				{
-					show_all_pieces(true);
-					break;
-				}
-				case '2':
-				{
-					handle_move(true);
-					break;
-				}
-				default:
-				{
-					cout << "Invalid character!\n";
-					break;
-				}
-				}
-			}
-
-		}
-		else
-		{
-			cout << "Black's turn!\n";
-			bool end_turn = false;
-			while (!end_turn)
-			{
-				show_menu_game();
-				char op;
-				cout << "Your option: ";
-				cin >> op;
-				switch (op)
-				{
-				case '1':
-				{
-					show_all_pieces(false);
-					break;
-				}
-				case '2':
-				{
-					end_turn = handle_move(false);
-					break;
-				}
-				default:
-				{
-					cout << "Invalid character!\n";
-					break;
-				}
-				}
-			}
-
-		}
+		turn(white_turn);
 		white_turn = !white_turn;
 	}
 }
 
-bool UI::handle_move(bool is_white_turn)
+void UI::handle_move(bool is_white_turn, bool& ended_turn)
 {
 	try
 	{
 		int id;
-		bool choice_made = false;
 		cout << "Select the chess piece id: ";
 		cin >> id;
 		ChessPiece* piece = service.get_piece_by_id(id);
 		if (is_white_turn == ((*piece).get_color() == Color::white))
 		{
-			show_list_of_coords(service.get_piece_moveset(id));
+			//show_list_of_coords(service.get_piece_moveset(id));
 			char x;
 			int y, xx;
 			cout << "Enter the x coordonate(A-H): ";
@@ -172,14 +147,13 @@ bool UI::handle_move(bool is_white_turn)
 			y--;
 			service.move_piece(id, xx, y);
 			cout << "Done!\n";
-			choice_made = true;
+			ended_turn = true;
 		}
 		else
 		{
 			cout << "This piece is not yours, as your color is " << (is_white_turn ? "white" : "black") << " and the piece color is "
 				<< (is_white_turn ? "black." : "white.") << "\n";
 		}
-		return choice_made;
 	}
 	catch (RepoException re)
 	{
@@ -200,4 +174,25 @@ void UI::show_list_of_coords(vector<pair<int, int>> list)
 			cout << char(elem.first + 65) << elem.second + 1 << "\n";
 		});
 	}
+}
+
+void UI::handle_moveset()
+{
+	try
+	{
+		int id;
+		cout << "Enter the piece id: ";
+		cin >> id;
+		vector<pair<int, int>> mov = service.get_piece_moveset(id);
+		if (mov.size() != 0)
+			cout << "Here are your possible moves:\n";
+		show_list_of_coords(mov);
+	}
+	catch (RepoException re)
+	{
+		cout << "ERROR! " << re.what() << "\n";
+	}
+	catch (ServiceException se) {
+		cout << "ERROR! " << se.what() << "\n";
+	};
 }

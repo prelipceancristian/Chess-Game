@@ -1,5 +1,2 @@
-﻿  Chess.cpp
-  UI.cpp
-  Generating Code...
-C:\Users\Cristi\source\repos\Chess\Chess\UI.cpp(191): warning C4715: 'UI::handle_move': not all control paths return a value
+﻿  Pawn.cpp
   Chess.vcxproj -> C:\Users\Cristi\source\repos\Chess\x64\Debug\Chess.exe

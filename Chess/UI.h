@@ -14,7 +14,9 @@ public:
 	void show_menu_game();
 	void show_all_pieces(bool);
 
-	bool handle_move(bool);
+	void handle_move(bool, bool&);
 	void show_list_of_coords(vector<pair<int, int>>);
+	void handle_moveset();
+	void turn(bool);
 };
 
