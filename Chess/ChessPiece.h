@@ -54,5 +54,11 @@ public:
 		os << piece.get_id() << ". " << piece.name << " at coords (" << char(piece.pos_x + 65) << ", " << piece.pos_y + 1 << ")";
 		return os;
 	}
+
+	virtual vector<pair<int, int>> attacks(ChessBoard)
+	{
+		vector<pair<int, int>> sol;
+		return sol;
+	}
 };
 

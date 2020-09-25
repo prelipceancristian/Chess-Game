@@ -34,5 +34,6 @@ public:
 	vector<ChessPiece*> get_white_pieces();
 	vector<ChessPiece*> get_black_pieces();
 	ChessPiece* get_piece_by_id(int);
+	vector<pair<int, int>> get_piece_attackset(int id);
 };
 

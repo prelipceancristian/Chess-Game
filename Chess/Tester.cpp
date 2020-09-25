@@ -28,6 +28,7 @@ void Tester::test_all()
 	Tester::test_king();
 	Tester::test_service();
 	Tester::test_movement();
+	Tester::test_attack();
 }
 
 void Tester::test_chess_piece()
@@ -306,6 +307,47 @@ void Tester::test_movement()
 	my_sol.erase(my_sol.begin() + 2);
 	mov = kw->moves(cb);
 	assert(mov == my_sol);
+
+	std::cout << "Ok!\n";
+}
+
+void Tester::test_attack()
+{
+	std::cout << "Attack tests...";
+
+	King* kw = new King(1, 3, 0, Color::white);
+	Pawn* pw1 = new Pawn(2, 3, 1, Color::white);
+	Pawn* pb1 = new Pawn(3, 2, 1, Color::black);
+	Pawn* pb2 = new Pawn(4, 2, 0, Color::black);
+
+	ChessBoard cb;
+	cb.set_val_at_coord(1, 3, 0);
+	cb.set_val_at_coord(1, 3, 1);
+	cb.set_val_at_coord(-1, 2, 1);
+	cb.set_val_at_coord(-1, 2, 0);
+
+	vector<pair<int, int>> my_sol = { {2, 0}, {2, 1} };
+	vector<pair<int, int>> att = kw->attacks(cb);
+	assert(my_sol == att);
+
+	Pawn* pb3 = new Pawn(5, 3, 2, Color::black);
+	cb.set_val_at_coord(-1, 3, 2);
+	att = kw->attacks(cb);
+	assert(my_sol == att);
+
+	Bishop* bb1 = new Bishop(6, 4, 1, Color::black);
+	cb.set_val_at_coord(-1, 4, 1);
+	att = bb1->attacks(cb);
+	my_sol = { {3, 0} };
+	assert(my_sol == att);
+
+	Pawn* pw2 = new Pawn(7, 5, 2, Color::white);
+	Pawn* pw3 = new Pawn(8, 6, 3, Color::white);
+	cb.set_val_at_coord(1, 5, 2);
+	cb.set_val_at_coord(1, 6, 3);
+	att = bb1->attacks(cb);
+	my_sol = { {5, 2}, {3, 0} };
+	assert(att == my_sol);
 
 	std::cout << "Ok!\n";
 }

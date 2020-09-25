@@ -15,6 +15,7 @@ public:
 	void test_king();
 	void test_service();
 	void test_movement();
+	void test_attack();
 };
 
 

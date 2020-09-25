@@ -20,7 +20,7 @@ int main()
         ChessBoard chessBoard;
         ServicePieces service = ServicePieces(repo, chessBoard);
         UI ui = UI(service);
-        ui.run_ui();
+        //ui.run_ui();
     }
     _CrtDumpMemoryLeaks();
 }

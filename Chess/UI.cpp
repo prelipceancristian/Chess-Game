@@ -211,7 +211,7 @@ void UI::resign(bool is_white, bool& end_game)
 	bool decided = false;
 	while (!decided)
 	{
-		cout << "Are you sure you want to resign?(y/n)";
+		cout << "Are you sure you want to resign?(y/n): ";
 		cin >> decision;
 		if (decision == 'y')
 		{
@@ -225,6 +225,6 @@ void UI::resign(bool is_white, bool& end_game)
 			decided = true;
 		}
 		else
-			cout << "Invalid character, choose 'y' if you want to resign and 'n' if you want to go back to the menu.";
+			cout << "Invalid character, choose 'y' if you want to resign and 'n' if you want to go back to the menu.\n";
 	}
 }

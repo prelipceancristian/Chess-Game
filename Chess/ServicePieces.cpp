@@ -147,3 +147,9 @@ ChessPiece* ServicePieces::get_piece_by_id(int _id)
 {
 	return repo.find(_id);
 }
+
+vector<pair<int, int>> ServicePieces::get_piece_attackset(int id)
+{
+	vector<pair<int, int>> sol;
+	return sol;
+}
