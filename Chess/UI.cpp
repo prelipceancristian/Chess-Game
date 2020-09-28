@@ -228,3 +228,12 @@ void UI::resign(bool is_white, bool& end_game)
 			cout << "Invalid character, choose 'y' if you want to resign and 'n' if you want to go back to the menu.\n";
 	}
 }
+
+void UI::check(bool is_white)
+{
+	vector<pair<int, int>> sol;
+	if (is_white)
+	{
+
+	}
+}

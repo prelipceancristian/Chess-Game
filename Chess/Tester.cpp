@@ -349,5 +349,27 @@ void Tester::test_attack()
 	my_sol = { {5, 2}, {3, 0} };
 	assert(att == my_sol);
 
+	Pawn* pw4 = new Pawn(9, 3, 1, Color::white);
+	Pawn* pw5 = new Pawn(10, 1, 0, Color::white);
+	cb.set_val_at_coord(1, 3, 1);
+	cb.set_val_at_coord(1, 1, 0);
+	my_sol = {};
+	att = pw4->attacks(cb);
+	assert(my_sol == att);
+
+	my_sol = { {2, 1} };
+	att = pw5->attacks(cb);
+	assert(my_sol == att);
+
+	my_sol = {};
+	att = pw2->attacks(cb);
+	assert(my_sol == att);
+
+	Rook* rw1 = new Rook(11, 4, 2, Color::white);
+	cb.set_val_at_coord(1, 4, 2);
+	att = rw1->attacks(cb);
+	my_sol = { {4, 1}, {3, 2} };
+	assert(att == my_sol);
+	
 	std::cout << "Ok!\n";
 }

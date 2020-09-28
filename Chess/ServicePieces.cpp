@@ -1,17 +1,17 @@
 #include "ServicePieces.h"
 void ServicePieces::move_piece(int id, int pos_x, int pos_y)
 {
-	//TODO: check whether there is a piece in front which blocks pathing
 	auto chesspiece = repo.find(id);
 	pair<int, int> pos = {pos_x, pos_y};
 	vector<pair<int, int>> positions = chesspiece->moves(this->cb);
 	auto it = std::find(positions.begin(), positions.end(), pos);
 	if (it == positions.end())
-		throw ServiceException("Move not possible!");
-	cb.set_val_at_coord(0, chesspiece->get_position_x(), chesspiece->get_position_y());
-	cb.set_val_at_coord(chesspiece->get_color() == Color::white ? 1 : -1, pos_x, pos_y);
-	chesspiece->set_position(pos_x, pos_y);
-	repo.update(chesspiece);
+		throw ServiceException("Move not possible!"); // check if the given position is part of the piece current moveset
+	//manage chessboard
+	cb.set_val_at_coord(0, chesspiece->get_position_x(), chesspiece->get_position_y()); // set the initial position in the chessboard to empty
+	cb.set_val_at_coord(chesspiece->get_color() == Color::white ? 1 : -1, pos_x, pos_y); // set the new value for the new position in the chessboard
+	chesspiece->set_position(pos_x, pos_y); // update position on piece pointer
+	repo.update(chesspiece); // update the repository
 }
 
 vector<pair<int, int>> ServicePieces::get_piece_moveset(int id)
@@ -152,4 +152,29 @@ vector<pair<int, int>> ServicePieces::get_piece_attackset(int id)
 {
 	vector<pair<int, int>> sol;
 	return sol;
+}
+
+void ServicePieces::attack(int id_attacker, int id_attacked)
+{
+	ChessPiece* attacker = repo.find(id_attacker);
+	ChessPiece* attacked = repo.find(id_attacked);
+	vector<pair<int, int>> attack_moveset = attacker->attacks(this->cb); // get the attacker attackset
+	bool found = false;
+	int px = attacked->get_position_x();
+	int py = attacked->get_position_y();
+	pair<int, int> pos(attacked->get_position_x(), attacked->get_position_y()); // make a pair of the attacked position
+	for (int i = 0; i < attack_moveset.size(); i++)
+	{
+		if (attack_moveset[i] == pos) //if the attacker moveset contains the pair
+		{
+			found = true; // mark it true
+			break;
+		}
+	}
+	if (!found)
+		throw ServiceException("Cannot attack this entity!"); // check whether the attacked position is within the attacker's moveset
+	repo.remove(id_attacked); //remove the piece from the repository
+	cb.set_val_at_coord(0, attacked->get_position_x(), attacked->get_position_y()); //set the attacked piece position to empty on the chessboard so that the move can be made
+	move_piece(id_attacker, px, py); // move the piece to the new position
+
 }

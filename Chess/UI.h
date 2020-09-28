@@ -19,5 +19,6 @@ public:
 	void handle_moveset();
 	void turn(bool, bool&);
 	void resign(bool, bool&);
+	void check(bool);
 };
 

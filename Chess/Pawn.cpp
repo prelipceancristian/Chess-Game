@@ -13,7 +13,7 @@ vector<pair<int, int>> Pawn::moves(ChessBoard cb)
 	return sol;
 }
 
-bool can_attack(int x, int y, int col, ChessBoard cb)
+bool can_attack_p(int x, int y, int col, ChessBoard cb)
 {
 	if (x < 8 && y >= 0 && y < 8 && x >= 0 && cb.get_val_at_coord(x, y) * col == -1)
 		return true;
@@ -28,16 +28,16 @@ vector<pair<int, int>> Pawn::attacks(ChessBoard cb)
 	int col = this->get_color() == Color::white ? 1 : -1;
 	if (col == 1)
 	{
-		if (can_attack(px + 1, py + 1, col, cb))
+		if (can_attack_p(px + 1, py + 1, col, cb))
 			sol.push_back({ px + 1, py + 1 });
-		if (can_attack(px - 1, py + 1, col, cb))
+		if (can_attack_p(px - 1, py + 1, col, cb))
 			sol.push_back({px - 1, py + 1});
 	}
 	else
 	{
-		if (can_attack(px + 1, py - 1, col, cb))
+		if (can_attack_p(px + 1, py - 1, col, cb))
 			sol.push_back({ px + 1, py - 1 });
-		if (can_attack(px - 1, py - 1, col, cb))
+		if (can_attack_p(px - 1, py - 1, col, cb))
 			sol.push_back({px - 1, py - 1});
 	}
 	return sol;

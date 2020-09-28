@@ -7,7 +7,7 @@ bool can_add(int x, int y, ChessBoard cb)
 	return false;
 }
 
-bool can_attack(int x, int y, int col, ChessBoard cb)
+bool can_attack_k(int x, int y, int col, ChessBoard cb)
 {
 	if (x < 8 && y >= 0 && y < 8 && x >= 0 && cb.get_val_at_coord(x, y) * col == -1)
 		return true;
@@ -66,39 +66,39 @@ vector<pair<int, int>> Knight::attacks(ChessBoard cb)
 	//pos 1
 	pos.first += 1;
 	pos.second += 2;
-	if (can_attack(pos.first, pos.second, col, cb))
+	if (can_attack_k(pos.first, pos.second, col, cb))
 		sol.push_back(pos);
 	//pos 2
 	pos.first += 1;
 	pos.second -= 1;
-	if (can_attack(pos.first, pos.second, col, cb))
+	if (can_attack_k(pos.first, pos.second, col, cb))
 		sol.push_back(pos);
 	//pos 3
 	pos.second -= 2;
-	if (can_attack(pos.first, pos.second, col, cb))
+	if (can_attack_k(pos.first, pos.second, col, cb))
 		sol.push_back(pos);
 	//pos 4
 	pos.first -= 1;
 	pos.second -= 1;
-	if (can_attack(pos.first, pos.second, col, cb))
+	if (can_attack_k(pos.first, pos.second, col, cb))
 		sol.push_back(pos);
 	//pos 5
 	pos.first -= 2;
-	if (can_attack(pos.first, pos.second, col, cb))
+	if (can_attack_k(pos.first, pos.second, col, cb))
 		sol.push_back(pos);
 	//pos 6
 	pos.first -= 1;
 	pos.second += 1;
-	if (can_attack(pos.first, pos.second, col, cb))
+	if (can_attack_k(pos.first, pos.second, col, cb))
 		sol.push_back(pos);
 	//pos 7
 	pos.second += 2;
-	if (can_attack(pos.first, pos.second, col, cb))
+	if (can_attack_k(pos.first, pos.second, col, cb))
 		sol.push_back(pos);
 	//pos 8
 	pos.first += 1;
 	pos.second += 1;
-	if (can_attack(pos.first, pos.second, col, cb))
+	if (can_attack_k(pos.first, pos.second, col, cb))
 		sol.push_back(pos);
 	return sol;
 }
